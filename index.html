@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blunder Home Studio</title>
     <style>
-        /* CSS для внешнего вида */
+        /* Базовые стили */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -14,37 +14,25 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        header {
+        header, footer {
             background-color: #000;
-            padding: 20px;
+            color: #fff;
             text-align: center;
         }
-        header h1 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #fff;
-            transition: color 0.3s ease;
+        header h1, footer .copyright {
+            font-size: 1.2rem;
+            margin: 10px 0;
         }
-        header h1:hover {
-            color: #ff6f00;
-        }
-        header .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        header .buttons a {
+        header .buttons a, footer .arrows a {
             text-decoration: none;
             color: #fff;
             background-color: #333;
             padding: 10px 20px;
             border-radius: 20px;
-            font-size: 1rem;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        header .buttons a.active {
+        header .buttons a.active, footer .arrows a:hover {
             background-color: #ff6f00;
-            color: #fff;
         }
         .container {
             padding: 20px;
@@ -53,27 +41,14 @@
             text-align: center;
             flex-grow: 1;
         }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 1.2rem;
-            line-height: 1.5;
-        }
         footer {
-            background-color: #000;
-            padding: 10px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             position: fixed;
             bottom: 0;
             width: 100%;
+            padding: 10px 20px;
             box-sizing: border-box;
         }
         footer .perforation {
-            width: 100%;
             height: 10px;
             background-image: linear-gradient(to right, #fff 50%, transparent 50%);
             background-size: 25px 10px;
@@ -82,40 +57,43 @@
         footer .arrows {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             margin-top: 10px;
         }
-        footer .arrows a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 2rem;
-            transition: color 0.3s ease;
-        }
-        footer .arrows a:hover {
-            color: #ff6f00;
-        }
-        footer .language-switcher {
+        footer .language-switcher, footer .signal-icon {
+            width: 40px;
+            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 40px;
-            height: 40px;
+            cursor: pointer;
+        }
+        footer .language-switcher {
             background-color: #fff;
             border-radius: 50%;
-            font-size: 1rem;
-            font-weight: bold;
             color: #000;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
         footer .language-switcher:hover {
             background-color: #ff6f00;
             color: #fff;
         }
-        footer .copyright {
-            font-size: 0.9rem;
-            color: #fff;
-            margin-top: 10px;
+        footer .signal-icon::before, footer .signal-icon::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+        footer .signal-icon::before { transform: translateX(-6px); }
+        footer .signal-icon::after { transform: translateX(6px); }
+        footer .signal-icon:hover {
+            background-color: red;
+            border-radius: 50%;
+        }
+        footer .signal-icon:hover::before, footer .signal-icon:hover::after {
+            content: none;
         }
         .loading-spinner {
             display: inline-block;
@@ -127,130 +105,109 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
         @media (max-width: 600px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            p {
-                font-size: 1rem;
-            }
-            header h1 {
-                font-size: 1.2rem;
-            }
-            header .buttons a {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
+            header h1 { font-size: 1rem; }
+            header .buttons a { font-size: 0.9rem; padding: 8px 16px; }
         }
     </style>
 </head>
 <body>
-    <!-- Основной контент -->
-    <main>
-        <!-- Хедер с заголовком и кнопками -->
-        <header>
-            <h1>Blunder home studio</h1>
-            <div class="buttons">
-                <a href="#" id="homeButton" class="active">Главная</a>
-                <a href="#" id="aboutButton">О нас</a>
-                <a href="#" id="contactButton">Контакты</a>
-            </div>
-        </header>
-
-        <!-- Основная часть -->
-        <div class="container">
-            <h1>Скоро открытие!</h1>
-            <p>Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!</p>
-            <div class="loading-spinner"></div>
+    <!-- Хедер -->
+    <header>
+        <h1 id="headerTitle">Домашняя студия Ляпсуса</h1>
+        <div class="buttons">
+            <a href="#" id="homeButton" class="active">Главная</a>
+            <a href="#" id="aboutButton">О нас</a>
+            <a href="#" id="contactButton">Контакты</a>
         </div>
+    </header>
 
-        <!-- Футер со стрелками и копирайтом -->
-        <footer>
-            <div class="perforation"></div>
-            <div class="arrows">
-                <a href="#" id="leftArrow">&#9664;</a>
-                <div class="language-switcher" id="languageSwitcher">rus</div>
-                <a href="#" id="rightArrow">&#9654;</a>
-            </div>
-            <div class="copyright" id="copyrightText">
-                © <span id="currentYear"></span> Все права защищены
-            </div>
-        </footer>
+    <!-- Основная часть -->
+    <main class="container">
+        <h1>Скоро открытие!</h1>
+        <p>Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!</p>
+        <div class="loading-spinner"></div>
     </main>
 
+    <!-- Футер -->
+    <footer>
+        <div class="perforation"></div>
+        <div class="arrows">
+            <a href="#" id="leftArrow">&#9664;</a>
+            <div class="language-switcher" id="languageSwitcher">rus</div>
+            <div class="signal-icon"></div>
+            <a href="#" id="rightArrow">&#9654;</a>
+        </div>
+        <div class="copyright" id="copyrightText">
+            © <span id="currentYear"></span> Все права защищены
+        </div>
+    </footer>
+
     <script>
-        // Добавляем текущий год в футер
+        // Инициализация текущего года
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Логика для переключения активной кнопки
-        const buttons = [
-            document.getElementById('homeButton'),
-            document.getElementById('aboutButton'),
-            document.getElementById('contactButton')
-        ];
-        let currentIndex = 0;
-
-        function setActiveButton(index) {
-            buttons.forEach((button, i) => {
-                button.classList.toggle('active', i === index);
-            });
-        }
-
-        document.getElementById('leftArrow').addEventListener('click', (e) => {
-            e.preventDefault();
-            currentIndex = (currentIndex - 1 + buttons.length) % buttons.length;
-            setActiveButton(currentIndex);
-        });
-
-        document.getElementById('rightArrow').addEventListener('click', (e) => {
-            e.preventDefault();
-            currentIndex = (currentIndex + 1) % buttons.length;
-            setActiveButton(currentIndex);
-        });
-
-        // Логика для переключения языков
-        const languages = ['rus', 'eng', 'ukr', 'heb'];
+        // Переводы
         const translations = {
             rus: {
+                title: 'Домашняя студия Ляпсуса',
                 menu: ['Главная', 'О нас', 'Контакты'],
                 copyright: 'Все права защищены'
             },
             eng: {
+                title: 'Blunder Home Studio',
                 menu: ['Home', 'About', 'Contacts'],
                 copyright: 'All rights reserved'
             },
             ukr: {
+                title: 'Домашня студія Ляпсуса',
                 menu: ['Головна', 'Про нас', 'Контакти'],
                 copyright: 'Всі права захищені'
             },
             heb: {
+                title: 'סטודיו ביתית של טעות',
                 menu: ['בית', 'עלינו', 'אנשי קשר'],
                 copyright: 'כל הזכויות שמורות'
             }
         };
         let currentLanguageIndex = 0;
+        const languages = ['rus', 'eng', 'ukr', 'heb'];
+        const buttons = [
+            document.getElementById('homeButton'),
+            document.getElementById('aboutButton'),
+            document.getElementById('contactButton')
+        ];
 
-        function updateMenuLanguage() {
-            const currentLanguage = languages[currentLanguageIndex];
-            const menuTranslations = translations[currentLanguage].menu;
-            buttons.forEach((button, index) => {
-                button.textContent = menuTranslations[index];
-            });
-            document.getElementById('copyrightText').textContent = `© ${new Date().getFullYear()} ${translations[currentLanguage].copyright}`;
+        // Обновление интерфейса
+        function updateLanguage() {
+            const lang = languages[currentLanguageIndex];
+            const { title, menu, copyright } = translations[lang];
+
+            document.getElementById('headerTitle').textContent = title;
+            buttons.forEach((button, i) => button.textContent = menu[i]);
+            document.getElementById('copyrightText').textContent = `© ${new Date().getFullYear()} ${copyright}`;
+            document.getElementById('languageSwitcher').textContent = lang;
         }
 
+        // Слушатели событий
+        document.getElementById('leftArrow').addEventListener('click', () => setActiveButton((currentIndex - 1 + buttons.length) % buttons.length));
+        document.getElementById('rightArrow').addEventListener('click', () => setActiveButton((currentIndex + 1) % buttons.length));
         document.getElementById('languageSwitcher').addEventListener('click', () => {
             currentLanguageIndex = (currentLanguageIndex + 1) % languages.length;
-            document.getElementById('languageSwitcher').textContent = languages[currentLanguageIndex];
-            updateMenuLanguage();
+            updateLanguage();
         });
 
-        // Инициализация меню на русском языке
-        updateMenuLanguage();
+        // Активная кнопка
+        function setActiveButton(index) {
+            currentIndex = index;
+            buttons.forEach((button, i) => button.classList.toggle('active', i === currentIndex));
+        }
+
+        // Инициализация
+        updateLanguage();
+        setActiveButton(0);
     </script>
 </body>
 </html>
