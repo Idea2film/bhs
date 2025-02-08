@@ -220,6 +220,7 @@
                 }
             }
         };
+
         let currentLanguageIndex = 0;
         const languages = ['rus', 'eng', 'ukr', 'heb'];
         const buttons = [
@@ -264,7 +265,8 @@
 
         // Слушатели событий для кнопок
         buttons.forEach((button, index) => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault(); // Предотвращаем стандартное поведение ссылки
                 setActiveButton(index);
                 updatePageContent();
             });
@@ -272,8 +274,7 @@
 
         // Активная кнопка
         function setActiveButton(index) {
-            currentIndex = index;
-            buttons.forEach((button, i) => button.classList.toggle('active', i === currentIndex));
+            buttons.forEach((button, i) => button.classList.toggle('active', i === index));
         }
 
         // Слушатели событий для стрелок
