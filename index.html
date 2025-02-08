@@ -208,7 +208,7 @@
                 copyright: 'כל הזכויות שמורות',
                 home: {
                     heading: 'בקרוב יפתח!',
-                    content: 'Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!'
+                    content: 'Coming soon! <br> נזabarom vidkrittya! <br> בקרוב יפתח!'
                 },
                 about: {
                     heading: 'עלינו',
@@ -278,8 +278,21 @@
         }
 
         // Слушатели событий для стрелок
-        document.getElementById('leftArrow').addEventListener('click', () => setActiveButton((currentIndex - 1 + buttons.length) % buttons.length));
-        document.getElementById('rightArrow').addEventListener('click', () => setActiveButton((currentIndex + 1) % buttons.length));
+        document.getElementById('leftArrow').addEventListener('click', (e) => {
+            e.preventDefault();
+            const currentIndex = buttons.findIndex(button => button.classList.contains('active'));
+            const newIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+            setActiveButton(newIndex);
+            updatePageContent();
+        });
+
+        document.getElementById('rightArrow').addEventListener('click', (e) => {
+            e.preventDefault();
+            const currentIndex = buttons.findIndex(button => button.classList.contains('active'));
+            const newIndex = (currentIndex + 1) % buttons.length;
+            setActiveButton(newIndex);
+            updatePageContent();
+        });
 
         // Переключение языков
         document.getElementById('languageSwitcher').addEventListener('click', () => {
