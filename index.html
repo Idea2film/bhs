@@ -126,8 +126,8 @@
 
     <!-- Основная часть -->
     <main class="container">
-        <h1 id="mainHeading">Скоро открытие!</h1>
-        <p id="mainContent">Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!</p>
+        <h1>Скоро открытие!</h1>
+        <p>Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!</p>
         <div class="loading-spinner"></div>
     </main>
 
@@ -154,70 +154,22 @@
             rus: {
                 title: 'Домашняя студия Ляпсуса',
                 menu: ['Главная', 'О нас', 'Контакты'],
-                copyright: 'Все права защищены',
-                home: {
-                    heading: 'Скоро открытие!',
-                    content: 'Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!'
-                },
-                about: {
-                    heading: 'О нас',
-                    content: 'Домашняя студия Ляпсуса - первая студия кинокомпании "Идеяфильм", открытая в Москве в 2003 году. Она занималась производством авторских и любительских фильмов вплоть до 2009 года. Затем большая часть оборудования была передана "Студии детского кино", которая работала на базе школ 1020, 1107, 109 до 2022 года. В 2024 году "Домашняя студия Ляпсуса" открылась снова в Хайфе. И снова занимается производством авторских фильмов.'
-                },
-                contact: {
-                    heading: 'Контакты',
-                    content: 'Студия находится в Израиле. Мы ждём вас в Хайфе. Пожалуйста, напишите нам: ideafilm@tutamail.com'
-                }
+                copyright: 'Все права защищены'
             },
             eng: {
                 title: 'Blunder Home Studio',
                 menu: ['Home', 'About', 'Contacts'],
-                copyright: 'All rights reserved',
-                home: {
-                    heading: 'Opening soon!',
-                    content: 'Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!'
-                },
-                about: {
-                    heading: 'About us',
-                    content: 'Blunder Home Studio is the first studio of the "IdeaFilm" company, opened in Moscow in 2003. It was engaged in the production of authorial and amateur films until 2009. Then most of the equipment was transferred to the "Children\'s Film Studio," which operated at schools 1020, 1107, and 109 until 2022. In 2024, "Blunder Home Studio" reopened in Haifa and continues producing authorial films.'
-                },
-                contact: {
-                    heading: 'Contacts',
-                    content: 'The studio is located in Israel. We are waiting for you in Haifa. Please write to us: ideafilm@tutamail.com'
-                }
+                copyright: 'All rights reserved'
             },
             ukr: {
                 title: 'Домашня студія Ляпсуса',
                 menu: ['Головна', 'Про нас', 'Контакти'],
-                copyright: 'Всі права захищені',
-                home: {
-                    heading: 'Незабаром відкриття!',
-                    content: 'Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!'
-                },
-                about: {
-                    heading: 'Про нас',
-                    content: 'Домашня студія Ляпсуса - перша студія кінокомпанії "Ідеяфільм", відкрита в Москві у 2003 році. Вона займалася виробництвом авторських і любительських фільмів аж до 2009 року. Потім більша частина обладнання була передана "Студії дитячого кіно", яка працювала на базі шкіл 1020, 1107, 109 до 2022 року. У 2024 році "Домашня студія Ляпсуса" знову відкрилася в Хайфі. І знову займається виробництвом авторських фільмів.'
-                },
-                contact: {
-                    heading: 'Контакти',
-                    content: 'Студія знаходиться в Ізраїлі. Ми чекаємо вас у Хайфі. Будь ласка, напишіть нам: ideafilm@tutamail.com'
-                }
+                copyright: 'Всі права захищені'
             },
             heb: {
                 title: 'סטודיו ביתית של טעות',
                 menu: ['בית', 'עלינו', 'אנשי קשר'],
-                copyright: 'כל הזכויות שמורות',
-                home: {
-                    heading: 'בקרוב יפתח!',
-                    content: 'Coming soon! <br> Незабаром відкриття! <br> בקרוב יפתח!'
-                },
-                about: {
-                    heading: 'עלינו',
-                    content: 'סטודיו ביתית של טעות היא הסטודיו הראשון של חברת הסרטים "אידיאה פילם", שנפתח במוסקבה בשנת 2003. היא עסקה בייצור סרטים אוטוריים ולא מקצוענים עד שנת 2009. לאחר מכן, רוב הציוד הועבר ל"סטודיו קולנוע ילדים", שפעל בבתי הספר 1020, 1107 ו-109 עד שנת 2022. בשנת 2024, "סטודיו ביתית של טעות" נפתח שוב בחיפה. והיא ממשיכה לייצר סרטים אוטוריים.'
-                },
-                contact: {
-                    heading: 'אנשי קשר',
-                    content: 'הסטודיו נמצא בישראל. אנו מחכים לכם בחיפה. אנא כתבו לנו: ideafilm@tutamail.com'
-                }
+                copyright: 'כל הזכויות שמורות'
             }
         };
         let currentLanguageIndex = 0;
@@ -237,37 +189,14 @@
             buttons.forEach((button, i) => button.textContent = menu[i]);
             document.getElementById('copyrightText').textContent = `© ${new Date().getFullYear()} ${copyright}`;
             document.getElementById('languageSwitcher').textContent = lang;
-
-            // Обновляем содержимое страницы
-            updatePageContent();
         }
 
-        // Обновление содержимого страницы
-        function updatePageContent() {
-            const lang = languages[currentLanguageIndex];
-            const activeButton = buttons.findIndex(button => button.classList.contains('active'));
-
-            if (activeButton === 0) {
-                // Главная страница
-                document.getElementById('mainHeading').textContent = translations[lang].home.heading;
-                document.getElementById('mainContent').innerHTML = translations[lang].home.content;
-            } else if (activeButton === 1) {
-                // Страница "О нас"
-                document.getElementById('mainHeading').textContent = translations[lang].about.heading;
-                document.getElementById('mainContent').innerHTML = translations[lang].about.content;
-            } else if (activeButton === 2) {
-                // Страница "Контакты"
-                document.getElementById('mainHeading').textContent = translations[lang].contact.heading;
-                document.getElementById('mainContent').innerHTML = translations[lang].contact.content;
-            }
-        }
-
-        // Слушатели событий для кнопок
-        buttons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                setActiveButton(index);
-                updatePageContent();
-            });
+        // Слушатели событий
+        document.getElementById('leftArrow').addEventListener('click', () => setActiveButton((currentIndex - 1 + buttons.length) % buttons.length));
+        document.getElementById('rightArrow').addEventListener('click', () => setActiveButton((currentIndex + 1) % buttons.length));
+        document.getElementById('languageSwitcher').addEventListener('click', () => {
+            currentLanguageIndex = (currentLanguageIndex + 1) % languages.length;
+            updateLanguage();
         });
 
         // Активная кнопка
@@ -275,16 +204,6 @@
             currentIndex = index;
             buttons.forEach((button, i) => button.classList.toggle('active', i === currentIndex));
         }
-
-        // Слушатели событий для стрелок
-        document.getElementById('leftArrow').addEventListener('click', () => setActiveButton((currentIndex - 1 + buttons.length) % buttons.length));
-        document.getElementById('rightArrow').addEventListener('click', () => setActiveButton((currentIndex + 1) % buttons.length));
-
-        // Переключение языков
-        document.getElementById('languageSwitcher').addEventListener('click', () => {
-            currentLanguageIndex = (currentLanguageIndex + 1) % languages.length;
-            updateLanguage();
-        });
 
         // Инициализация
         updateLanguage();
