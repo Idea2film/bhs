@@ -42,7 +42,7 @@
             font-size: 1rem;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        header .buttons a:hover {
+        header .buttons a.active {
             background-color: #ff6f00;
             color: #fff;
         }
@@ -67,7 +67,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -80,19 +79,10 @@
             background-size: 25px 10px;
             margin-bottom: 10px;
         }
-        footer .copyright {
-            font-size: 0.9rem;
-            color: #fff;
-            transition: color 0.3s ease;
-            margin-bottom: 10px;
-        }
-        footer .copyright:hover {
-            color: #ff6f00;
-        }
         footer .arrows {
-            width: 100%;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
             margin-top: 10px;
         }
         footer .arrows a {
@@ -103,6 +93,29 @@
         }
         footer .arrows a:hover {
             color: #ff6f00;
+        }
+        footer .language-switcher {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        footer .language-switcher:hover {
+            background-color: #ff6f00;
+            color: #fff;
+        }
+        footer .copyright {
+            font-size: 0.9rem;
+            color: #fff;
+            margin-top: 10px;
         }
         .loading-spinner {
             display: inline-block;
@@ -140,11 +153,11 @@
     <main>
         <!-- Хедер с заголовком и кнопками -->
         <header>
-            <h1>Blunder Home Studio</h1>
+            <h1>Blunder home studio</h1>
             <div class="buttons">
-                <a href="#">Главная</a>
-                <a href="#">О нас</a>
-                <a href="#">Контакты</a>
+                <a href="#" id="homeButton" class="active">Главная</a>
+                <a href="#" id="aboutButton">О нас</a>
+                <a href="#" id="contactButton">Контакты</a>
             </div>
         </header>
 
@@ -158,12 +171,13 @@
         <!-- Футер со стрелками и копирайтом -->
         <footer>
             <div class="perforation"></div>
-            <div class="copyright">
-                © <span id="currentYear"></span> Все права защищены
-            </div>
             <div class="arrows">
-                <a href="#">&#9664;</a>
-                <a href="#">&#9654;</a>
+                <a href="#" id="leftArrow">&#9664;</a>
+                <div class="language-switcher" id="languageSwitcher">rus</div>
+                <a href="#" id="rightArrow">&#9654;</a>
+            </div>
+            <div class="copyright" id="copyrightText">
+                © <span id="currentYear"></span> Все права защищены
             </div>
         </footer>
     </main>
@@ -171,6 +185,72 @@
     <script>
         // Добавляем текущий год в футер
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Логика для переключения активной кнопки
+        const buttons = [
+            document.getElementById('homeButton'),
+            document.getElementById('aboutButton'),
+            document.getElementById('contactButton')
+        ];
+        let currentIndex = 0;
+
+        function setActiveButton(index) {
+            buttons.forEach((button, i) => {
+                button.classList.toggle('active', i === index);
+            });
+        }
+
+        document.getElementById('leftArrow').addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+            setActiveButton(currentIndex);
+        });
+
+        document.getElementById('rightArrow').addEventListener('click', (e) => {
+            e.preventDefault();
+            currentIndex = (currentIndex + 1) % buttons.length;
+            setActiveButton(currentIndex);
+        });
+
+        // Логика для переключения языков
+        const languages = ['rus', 'eng', 'ukr', 'heb'];
+        const translations = {
+            rus: {
+                menu: ['Главная', 'О нас', 'Контакты'],
+                copyright: 'Все права защищены'
+            },
+            eng: {
+                menu: ['Home', 'About', 'Contacts'],
+                copyright: 'All rights reserved'
+            },
+            ukr: {
+                menu: ['Головна', 'Про нас', 'Контакти'],
+                copyright: 'Всі права захищені'
+            },
+            heb: {
+                menu: ['בית', 'עלינו', 'אנשי קשר'],
+                copyright: 'כל הזכויות שמורות'
+            }
+        };
+        let currentLanguageIndex = 0;
+
+        function updateMenuLanguage() {
+            const currentLanguage = languages[currentLanguageIndex];
+            const menuTranslations = translations[currentLanguage].menu;
+            buttons.forEach((button, index) => {
+                button.textContent = menuTranslations[index];
+            });
+            document.getElementById('copyrightText').textContent = `© ${new Date().getFullYear()} ${translations[currentLanguage].copyright}`;
+        }
+
+        document.getElementById('languageSwitcher').addEventListener('click', () => {
+            currentLanguageIndex = (currentLanguageIndex + 1) % languages.length;
+            document.getElementById('languageSwitcher').textContent = languages[currentLanguageIndex];
+            updateMenuLanguage();
+        });
+
+        // Инициализация меню на русском языке
+        updateMenuLanguage();
     </script>
 </body>
 </html>
